@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { firestore } from "../../common/utils/firebase";
-import { List } from "grommet";
 
 const CompanyDetails = ({ match }) => {
   const [companyData, setCompanyData] = useState({});
-  const handleClick = val => {
-    console.log(val);
-  };
+
   useEffect(() => {
     console.log(match.params.companyId);
     firestore

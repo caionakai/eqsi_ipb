@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
 import { firebase } from "../../common/utils/firebase";
+import { withRouter } from "react-router-dom";
 
 const RegisterCompanies = () => {
   const onSubmit = val => {
@@ -19,7 +20,9 @@ const RegisterCompanies = () => {
       });
   };
 
-  const validate = () => {};
+  const validate = val => {
+    console.log(val);
+  };
   return (
     <Form
       onSubmit={onSubmit}
@@ -48,4 +51,4 @@ const RegisterCompanies = () => {
   );
 };
 
-export default RegisterCompanies;
+export default withRouter(RegisterCompanies);
