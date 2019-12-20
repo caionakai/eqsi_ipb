@@ -12,6 +12,7 @@ const CompaniesList = ({ history }) => {
     // console.log(val.item.id);
     history.push(`/admin/company/${val.item.id}`);
   };
+  
   useEffect(() => {
     firestore
       .collection("companies")

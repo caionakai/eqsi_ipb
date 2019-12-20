@@ -40,7 +40,7 @@ function RegisterEmployees() {
                 validate={validade([isRequired])}
               />
               <Field
-                name="id"
+                name="identification"
                 placeholder="employee id"
                 component={Input}
                 validate={validade([isRequired])}
