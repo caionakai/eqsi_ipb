@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
-function RegisterCompanies() {
-    return (
-        <div>
-            Register Companies
-        </div>
-    )
-}
+const RegisterCompanies = () => {
+  const onSubmit = () => {};
 
-export default RegisterCompanies
+  const validate = () => {};
+  return <div>Register Companies</div>;
+};
+
+export default RegisterCompanies;
