@@ -14,11 +14,11 @@ export default function Admin() {
       name: "Companies",
       items: [
         {
-          name: "list",
+          name: "List",
           link: "/admin/companies/list"
         },
         {
-          name: "register",
+          name: "Register",
           link: "/admin/companies/register"
         }
       ]
@@ -27,7 +27,7 @@ export default function Admin() {
       name: "Employees",
       items: [
         {
-          name: "register",
+          name: "Register",
           link: "/admin/employees/register"
         }
       ]

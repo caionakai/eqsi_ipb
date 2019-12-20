@@ -1,0 +1,15 @@
+.geral {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 80% 10%;
+  grid-template-rows: auto;
+}
+
+.dados {
+  grid-column: 1 / 1;
+  grid-row: 1 / auto;
+}
+
+.botao {
+  grid-column: 2 / 2;
+}
