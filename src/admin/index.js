@@ -15,11 +15,11 @@ export default function Admin() {
       name: "Companies",
       items: [
         {
-          name: "list",
+          name: "List",
           link: "/admin/companies/list"
         },
         {
-          name: "register",
+          name: "Register",
           link: "/admin/companies/register"
         }
       ]
