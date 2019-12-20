@@ -9,9 +9,34 @@ import RegisterEmployees from "./pages/RegisterEmployees";
 import CustomHeader from "../common/components/Header";
 
 export default function Admin() {
+  const menus = [
+    {
+      name: "Companies",
+      items: [
+        {
+          name: "list",
+          link: "/admin/companies/list"
+        },
+        {
+          name: "register",
+          link: "/admin/companies/register"
+        }
+      ]
+    },
+    {
+      name: "Employees",
+      items: [
+        {
+          name: "register",
+          link: "/admin/employees/register"
+        }
+      ]
+    }
+  ];
+
   return (
     <>
-      <CustomHeader />
+      <CustomHeader menus={menus} homeLink="/admin" />
       <Main pad="large" align="center">
         <Switch>
           <Route path="/admin/companies/register">
