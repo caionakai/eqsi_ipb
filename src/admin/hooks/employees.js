@@ -8,7 +8,7 @@ export const useEmployees = () => {
   const [submiting, setSubmiting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState(null);
   const [fetching, setFetching] = useState(false);
-  const [emploees, setEmploees] = useState([]);
+  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     if (employee) {
@@ -16,7 +16,6 @@ export const useEmployees = () => {
       db.collection("employees")
         .add(employee)
         .then(docRef => {
-          setSubmiting(false);
           setSubmitMessage({
             type: "success",
             msg: "New employee registered"
@@ -27,6 +26,9 @@ export const useEmployees = () => {
             type: "error",
             msg: "Failed to register a new employee"
           });
+        })
+        .finally(() => {
+          setSubmiting(false);
         });
     }
     return () => {};
@@ -38,13 +40,9 @@ export const useEmployees = () => {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          setEmploees(prevState => {
+          setEmployees(prevState => {
             let tmpArr = [...prevState];
-            tmpArr.push({
-              name: doc.data().name,
-              identification: doc.data().identification,
-              id: doc.id
-            });
+            tmpArr.push({ ...doc.data(), id: doc.id });
             return [...tmpArr];
           });
         });
@@ -54,5 +52,34 @@ export const useEmployees = () => {
       });
   }, []);
 
-  return { setEmployee, submiting, submitMessage, fetching, emploees };
+  const deleteEmployee = id => {
+    setSubmiting(true);
+    db.collection("employees")
+      .doc(id)
+      .delete()
+      .then(function() {
+        setSubmitMessage({
+          type: "success",
+          msg: "Employee deleted"
+        });
+      })
+      .catch(function(error) {
+        setSubmitMessage({
+          type: "error",
+          msg: "Failed to delete a employee"
+        });
+      })
+      .finally(() => {
+        setSubmiting(false);
+      });
+  };
+
+  return {
+    setEmployee,
+    submiting,
+    submitMessage,
+    fetching,
+    employees,
+    deleteEmployee
+  };
 };

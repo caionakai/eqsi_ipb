@@ -5,11 +5,11 @@ import { List, Heading } from "grommet";
 import { useHistory } from "react-router-dom";
 
 function ListEmployees() {
-  const { fetching, emploees } = useEmployees();
+  const { fetching, employees } = useEmployees();
   const history = useHistory();
 
   const handleClick = val => {
-    history.push(`/admin/employees/${val.item.id}`);
+    history.push(`/admin/employee/${val.item.id}`);
   };
 
   if (fetching) {
@@ -18,11 +18,11 @@ function ListEmployees() {
 
   return (
     <>
-      <Heading color="dark-2">List of emploees</Heading>
+      <Heading color="dark-2">List of employees</Heading>
       <List
         primaryKey="name"
         secondaryKey="identification"
-        data={emploees}
+        data={employees}
         onClickItem={handleClick}
       />
     </>

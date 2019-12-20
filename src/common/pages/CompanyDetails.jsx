@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { firestore } from "../../common/utils/firebase";
 import { Box, Button } from "grommet";
 import { Close } from "grommet-icons";
-import "./CompanyDetails.style.css";
 
 const CompanyDetails = ({ history, match }) => {
   const [companyData, setCompanyData] = useState({});
@@ -26,7 +25,7 @@ const CompanyDetails = ({ history, match }) => {
       .catch(function(error) {
         console.log("Error getting document:", error);
       });
-  }, []);
+  }, [match.params.companyId]);
 
   const deleteCompany = () => {
     firestore
