@@ -19,3 +19,11 @@ code {
 .button-container {
   text-align: right;
 }
+
+.custom-list {
+  width: 100%
+}
+
+ul {
+  width: 100%;
+}
