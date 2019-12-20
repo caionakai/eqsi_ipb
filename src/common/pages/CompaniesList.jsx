@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { firestore } from "../../common/utils/firebase";
 import { List } from "grommet";
 
-const CompaniesList = () => {
+import Spinner from "../components/Spinner";
+
+const CompaniesList = ({ history }) => {
   const [arrData, setArrData] = useState([]);
-  let history = useHistory();
+
   const handleClick = val => {
     // console.log(val.item.id);
     history.push(`/admin/company/${val.item.id}`);
@@ -30,14 +32,29 @@ const CompaniesList = () => {
       });
   }, []);
 
+  const waitData = () => {
+    while (arrData.length === 0) {
+      return <Spinner />;
+    }
+    return (
+      <List
+        primaryKey="name"
+        secondaryKey="cnpj"
+        data={arrData}
+        onClickItem={handleClick}
+      />
+    );
+  };
+
   return (
-    <List
-      primaryKey="name"
-      secondaryKey="cnpj"
-      data={arrData}
-      onClickItem={handleClick}
-    />
+    // <List
+    //   primaryKey="name"
+    //   secondaryKey="cnpj"
+    //   data={arrData}
+    //   onClickItem={handleClick}
+    // />
+    <>{waitData()}</>
   );
 };
 
-export default CompaniesList;
+export default withRouter(CompaniesList);

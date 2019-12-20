@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Field } from "react-final-form";
+import { withRouter } from "react-router-dom";
 import { firestore } from "../../common/utils/firebase";
 
 const RegisterCompanies = () => {
@@ -19,7 +20,9 @@ const RegisterCompanies = () => {
       });
   };
 
-  const validate = () => {};
+  const validate = val => {
+    console.log(val);
+  };
   return (
     <Form
       onSubmit={onSubmit}
@@ -48,4 +51,4 @@ const RegisterCompanies = () => {
   );
 };
 
-export default RegisterCompanies;
+export default withRouter(RegisterCompanies);
