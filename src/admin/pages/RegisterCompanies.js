@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Field } from "react-final-form";
 import { Button, Heading } from "grommet";
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import { firebase } from "../../common/utils/firebase";
 import Input from "../../common/components/Input";
 import { validade, isRequired } from "../../common/utils/validation";
@@ -82,4 +82,4 @@ const RegisterCompanies = () => {
   );
 };
 
-export default withRouter(RegisterCompanies);
+export default RegisterCompanies;
