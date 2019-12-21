@@ -18,10 +18,6 @@ function ListEmployees() {
   const { fetching, employees, deleteEmployee, submitMessage } = useEmployees();
   const history = useHistory();
 
-  const handleClick = val => {
-    history.push(`/admin/employee/${val.item.id}`);
-  };
-
   const handleDelete = id => () => {
     swal({
       title: "Are you sure?",

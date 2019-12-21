@@ -7,7 +7,6 @@ export const useEmployees = () => {
   const [employee, setEmployee] = useState(null);
   const [submiting, setSubmiting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState(null);
-  const [fetching, setFetching] = useState(false);
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
@@ -72,7 +71,6 @@ export const useEmployees = () => {
     setEmployee,
     submiting,
     submitMessage,
-    fetching,
     employees,
     deleteEmployee
   };
