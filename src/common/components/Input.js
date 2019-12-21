@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, Box, Select, Text, FormField } from "grommet";
+import { TextInput, Box, Select, FormField } from "grommet";
 
 function Input({ input, meta, inputType, ...props }) {
   let InputComponent;

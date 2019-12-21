@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "grommet";
-import { Form, Field } from "react-final-form";
+import { Form, Field, FormSpy } from "react-final-form";
 
 import Input from "../../common/components/Input";
 import { validade, isRequired } from "../../common/utils/validation";
@@ -11,7 +11,8 @@ function EmployeeForm({
   isReadyToReset,
   setIsReadyToReset,
   submiting,
-  initialValues
+  initialValues,
+  cancel
 }) {
   return (
     <Form onSubmit={onSubmit} initialValues={initialValues}>
@@ -50,13 +51,29 @@ function EmployeeForm({
               validate={validade([isRequired])}
             />
             <div className="button-container">
-              <Button
-                type="submit"
-                disabled={submiting}
-                label="Submit"
-                margin="small"
-                validate={validade([isRequired])}
-              />
+              {cancel && (
+                <Button
+                  onClick={() => {
+                    reset();
+                    cancel();
+                  }}
+                  disabled={submiting}
+                  label="Cancel"
+                  color="status-unknown"
+                  margin="small"
+                />
+              )}
+              <FormSpy subscription={{ pristine: true }}>
+                {props => (
+                  <Button
+                    type="submit"
+                    disabled={submiting || props.pristine}
+                    label="Submit"
+                    margin="small"
+                    primary
+                  />
+                )}
+              </FormSpy>
             </div>
           </form>
         );

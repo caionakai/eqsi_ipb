@@ -9,15 +9,25 @@ import {
   TableCell,
   TableBody,
   Button,
-  Layer
+  Layer,
+  Box
 } from "grommet";
 import { useHistory } from "react-router-dom";
 import * as Icons from "grommet-icons";
 import swal from "sweetalert";
+import EmployeeForm from "../components/EmployeeForm";
 
 function ListEmployees() {
   const [show, setShow] = useState(false);
-  const { fetching, employees, deleteEmployee, submitMessage } = useEmployees();
+  const [employee, setEmployee] = useState({});
+  const {
+    fetching,
+    employees,
+    deleteEmployee,
+    submitMessage,
+    submiting,
+    updateEmployee
+  } = useEmployees();
   const history = useHistory();
 
   const handleDelete = id => () => {
@@ -34,10 +44,15 @@ function ListEmployees() {
     });
   };
 
+  const handleUpdate = employee => {
+    updateEmployee(employee.id, employee);
+  };
+
   useEffect(() => {
     if (!submitMessage) return;
-    swal(submitMessage.msg, "", submitMessage.type);
-    if (submitMessage.type === "success") history.push("/admin/employees/list");
+    swal(submitMessage.msg, "", submitMessage.type).then(() => {
+      if (submitMessage.type === "success") setShow(false);
+    });
   }, [history, submitMessage]);
 
   if (fetching) {
@@ -55,7 +70,10 @@ function ListEmployees() {
         <TableCell>
           <Button
             icon={<Icons.Edit color="neutral-3" />}
-            onClick={() => setShow(true)}
+            onClick={() => {
+              setEmployee(employee);
+              setShow(true);
+            }}
           />
           <Button
             icon={<Icons.Trash color="status-critical" />}
@@ -92,10 +110,19 @@ function ListEmployees() {
       </Table>
       {show && (
         <Layer
+          full
+          margin={{ left: "20%", top: "10%", right: "20%", bottom: "30%" }}
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >
-          <Button label="close" onClick={() => setShow(false)} />
+          <Box align="center" alignContent="center" pad="large">
+            <EmployeeForm
+              onSubmit={handleUpdate}
+              initialValues={employee}
+              cancel={() => setShow(false)}
+              submiting={submiting}
+            />
+          </Box>
         </Layer>
       )}
     </>

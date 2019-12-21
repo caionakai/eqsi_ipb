@@ -14,7 +14,7 @@ export const useEmployees = () => {
       setSubmiting(true);
       db.collection("employees")
         .add(employee)
-        .then(docRef => {
+        .then(() => {
           setSubmitMessage({
             type: "success",
             msg: "New employee registered"
@@ -67,11 +67,34 @@ export const useEmployees = () => {
       });
   };
 
+  const updateEmployee = (id, employee) => {
+    setSubmiting(true);
+    db.collection("employees")
+      .doc(id)
+      .set(employee, { merge: true })
+      .then(() => {
+        setSubmitMessage({
+          type: "success",
+          msg: "Employee updated"
+        });
+      })
+      .catch((error) => {
+        setSubmitMessage({
+          type: "error",
+          msg: "Failed to update a employee"
+        });
+      })
+      .finally(() => {
+        setSubmiting(false);
+      });
+  };
+
   return {
     setEmployee,
     submiting,
     submitMessage,
     employees,
-    deleteEmployee
+    deleteEmployee,
+    updateEmployee
   };
 };
