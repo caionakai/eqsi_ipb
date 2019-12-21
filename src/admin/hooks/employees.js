@@ -35,21 +35,15 @@ export const useEmployees = () => {
   }, [employee]);
 
   useEffect(() => {
-    setFetching(true);
-    db.collection("employees")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          setEmployees(prevState => {
-            let tmpArr = [...prevState];
-            tmpArr.push({ ...doc.data(), id: doc.id });
-            return [...tmpArr];
-          });
-        });
-      })
-      .finally(() => {
-        setFetching(false);
-      });
+    const unsubscribe = db.collection("employees").onSnapshot(snapshot => {
+      const allEmployees = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setEmployees(allEmployees);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const deleteEmployee = id => {

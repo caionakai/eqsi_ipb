@@ -50,7 +50,7 @@ function RegisterEmployees() {
                 placeholder="gender"
                 component={Input}
                 inputType="select"
-                options={["Masculino", "Feminino"]}
+                options={["Male", "Female"]}
                 validate={validade([isRequired])}
               />
               <Field
