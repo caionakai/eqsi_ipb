@@ -6,7 +6,7 @@ import { Close, Edit } from "grommet-icons";
 import { useHistory } from "react-router-dom";
 import ReactModal from "react-modal";
 import { useModal } from "react-modal-hook";
-import RegisterCompanies from "../../admin/pages/RegisterCompanies";
+import RegisterCompanies from "./RegisterCompanies";
 
 const CompanyDetails = ({ history, match }) => {
   const customStyles = {

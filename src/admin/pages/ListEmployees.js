@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useEmployees } from "../hooks/employees";
-import Spinner from "../../common/components/Spinner";
 import {
   Heading,
   Table,
@@ -21,7 +20,6 @@ function ListEmployees() {
   const [show, setShow] = useState(false);
   const [employee, setEmployee] = useState({});
   const {
-    fetching,
     employees,
     deleteEmployee,
     submitMessage,
@@ -54,10 +52,6 @@ function ListEmployees() {
       if (submitMessage.type === "success") setShow(false);
     });
   }, [history, submitMessage]);
-
-  if (fetching) {
-    return <Spinner />;
-  }
 
   const renderRows = () =>
     employees &&

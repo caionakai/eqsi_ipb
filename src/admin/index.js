@@ -3,12 +3,11 @@ import { Main } from "grommet";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 import RegisterCompanies from "./pages/RegisterCompanies";
-import CompaniesList from "../common/pages/CompaniesList";
-import CompanyDetails from "../common/pages/CompanyDetails";
+import CompaniesList from "./pages/CompaniesList";
+import CompanyDetails from "./pages/CompanyDetails";
 import RegisterEmployees from "./pages/RegisterEmployees";
 import CustomHeader from "../common/components/Header";
 import ListEmployees from "./pages/ListEmployees";
-import DetailEmployee from "./pages/DetailEmployee";
 
 export default function Admin() {
   const menus = [
@@ -63,10 +62,6 @@ export default function Admin() {
 
           <Route exact path="/admin/employees/list">
             <ListEmployees />
-          </Route>
-
-          <Route path="/admin/employee/:employeeId">
-            <DetailEmployee />
           </Route>
 
         </Switch>
