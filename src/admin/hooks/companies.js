@@ -30,7 +30,6 @@ export const useCompanies = () => {
           setSubmiting(false);
         });
     }
-    return () => {};
   }, [company]);
 
   useEffect(() => {
@@ -78,7 +77,7 @@ export const useCompanies = () => {
           msg: "Company updated"
         });
       })
-      .catch((error) => {
+      .catch(error => {
         setSubmitMessage({
           type: "error",
           msg: "Failed to update a company"

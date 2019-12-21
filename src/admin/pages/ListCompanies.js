@@ -13,10 +13,12 @@ import {
 import swal from "sweetalert";
 import * as Icons from "grommet-icons";
 
+import CompanyForm from "../components/CompanyForm";
 import { useCompanies } from "../hooks/companies";
 
 const CompaniesList = () => {
   const [company, setCompany] = useState({});
+  const [show, setShow] = useState(false);
   const {
     companies,
     deleteCompany,
@@ -43,6 +45,13 @@ const CompaniesList = () => {
     updateCompany(employee.id, employee);
   };
 
+  useEffect(() => {
+    if (!submitMessage) return;
+    swal(submitMessage.msg, "", submitMessage.type).then(() => {
+      if (submitMessage.type === "success") setShow(false);
+    });
+  }, [submitMessage]);
+
   const renderRows = () =>
     companies &&
     companies.map(company => (
@@ -54,7 +63,7 @@ const CompaniesList = () => {
             icon={<Icons.Edit color="neutral-3" />}
             onClick={() => {
               setCompany(company);
-              // setShow(true);
+              setShow(true);
             }}
           />
           <Button
@@ -67,7 +76,7 @@ const CompaniesList = () => {
 
   return (
     <>
-      <Heading color="dark-2">List of employees</Heading>
+      <Heading color="dark-2">List of companies</Heading>
       <Table alignSelf="stretch">
         <TableHeader>
           <TableRow>
@@ -84,6 +93,23 @@ const CompaniesList = () => {
         </TableHeader>
         <TableBody>{renderRows()}</TableBody>
       </Table>
+      {show && (
+        <Layer
+          full
+          margin={{ left: "20%", top: "10%", right: "20%", bottom: "30%" }}
+          onEsc={() => setShow(false)}
+          onClickOutside={() => setShow(false)}
+        >
+          <Box align="center" alignContent="center" pad="large">
+            <CompanyForm
+              onSubmit={handleUpdate}
+              initialValues={company}
+              cancel={() => setShow(false)}
+              submiting={submiting}
+            />
+          </Box>
+        </Layer>
+      )}
     </>
   );
 };

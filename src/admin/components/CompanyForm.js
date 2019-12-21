@@ -8,10 +8,11 @@ function CompanyForm({
   onSubmit,
   isReadyToReset,
   setIsReadyToReset,
-  submiting
+  submiting,
+  initialValues
 }) {
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} initialValues={initialValues}>
       {({ handleSubmit, form: { reset } }) => {
         if (isReadyToReset) {
           setIsReadyToReset(false);

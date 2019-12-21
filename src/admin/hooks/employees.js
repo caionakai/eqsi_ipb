@@ -30,7 +30,6 @@ export const useEmployees = () => {
           setSubmiting(false);
         });
     }
-    return () => {};
   }, [employee]);
 
   useEffect(() => {

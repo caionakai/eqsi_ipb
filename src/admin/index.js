@@ -3,8 +3,7 @@ import { Main } from "grommet";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 
 import RegisterCompanies from "./pages/RegisterCompanies";
-import CompaniesList from "./pages/CompaniesList";
-import CompanyDetails from "./pages/CompanyDetails";
+import CompaniesList from "./pages/ListCompanies";
 import RegisterEmployees from "./pages/RegisterEmployees";
 import CustomHeader from "../common/components/Header";
 import ListEmployees from "./pages/ListEmployees";
@@ -50,10 +49,6 @@ export default function Admin() {
 
           <Route path="/admin/companies/list">
             <CompaniesList />
-          </Route>
-
-          <Route path="/admin/company/:companyId">
-            <CompanyDetails />
           </Route>
 
           <Route path="/admin/employees/register">

@@ -11,7 +11,6 @@ import {
   Layer,
   Box
 } from "grommet";
-import { useHistory } from "react-router-dom";
 import * as Icons from "grommet-icons";
 import swal from "sweetalert";
 import EmployeeForm from "../components/EmployeeForm";
@@ -26,7 +25,6 @@ function ListEmployees() {
     submiting,
     updateEmployee
   } = useEmployees();
-  const history = useHistory();
 
   const handleDelete = id => () => {
     swal({
@@ -51,7 +49,7 @@ function ListEmployees() {
     swal(submitMessage.msg, "", submitMessage.type).then(() => {
       if (submitMessage.type === "success") setShow(false);
     });
-  }, [history, submitMessage]);
+  }, [submitMessage]);
 
   const renderRows = () =>
     employees &&
