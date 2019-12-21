@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { Header, Menu, Button, Box } from "grommet";
+import { Header, Menu, Button, Box, Anchor } from "grommet";
 import * as Icons from "grommet-icons";
 
-function CustomHeader({ history, menus, homeLink }) {
+function CustomHeader({ history, menus, homeLink, brandLabel }) {
   const renderMenus = () =>
     menus.map(menu => (
       <Menu
@@ -20,14 +20,18 @@ function CustomHeader({ history, menus, homeLink }) {
     ));
   return (
     <Header background="brand">
-      <Button
-        icon={<Icons.Home />}
-        hoverIndicator
-        onClick={() => {
-          history.push(homeLink);
-          history.go();
-        }}
-      />
+      <Box margin="small">
+        <Anchor
+          // icon={<Icons.Home />}
+          focusIndicator={false}
+          color="light-1"
+          label={brandLabel}
+          onClick={() => {
+            history.push(homeLink);
+            history.go();
+          }}
+        />
+      </Box>
 
       <Box direction="row-responsive">
         {renderMenus()}

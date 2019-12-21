@@ -40,7 +40,7 @@ export default function Admin() {
 
   return (
     <>
-      <CustomHeader menus={menus} homeLink="/admin" />
+      <CustomHeader brandLabel="Dashboard" menus={menus} homeLink="/admin" />
       <Main pad="large" align="center">
         <Switch>
           <Route path="/admin/companies/register">
