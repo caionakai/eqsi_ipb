@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useEmployees } from "../hooks/employees";
 import Spinner from "../../common/components/Spinner";
 import {
@@ -8,13 +8,15 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Button
+  Button,
+  Layer
 } from "grommet";
 import { useHistory } from "react-router-dom";
 import * as Icons from "grommet-icons";
 import swal from "sweetalert";
 
 function ListEmployees() {
+  const [show, setShow] = useState(false);
   const { fetching, employees, deleteEmployee, submitMessage } = useEmployees();
   const history = useHistory();
 
@@ -51,7 +53,10 @@ function ListEmployees() {
         <TableCell>{employee.gender}</TableCell>
         <TableCell>{employee.birthday}</TableCell>
         <TableCell>
-          <Button icon={<Icons.Edit color="neutral-3" />} />
+          <Button
+            icon={<Icons.Edit color="neutral-3" />}
+            onClick={() => setShow(true)}
+          />
           <Button
             icon={<Icons.Trash color="status-critical" />}
             onClick={handleDelete(employee.id)}
@@ -85,6 +90,14 @@ function ListEmployees() {
         </TableHeader>
         <TableBody>{renderRows()}</TableBody>
       </Table>
+      {show && (
+        <Layer
+          onEsc={() => setShow(false)}
+          onClickOutside={() => setShow(false)}
+        >
+          <Button label="close" onClick={() => setShow(false)} />
+        </Layer>
+      )}
     </>
   );
 }
