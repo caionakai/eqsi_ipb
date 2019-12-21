@@ -2,9 +2,33 @@ import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { firestore } from "../../common/utils/firebase";
 import { Box, Button } from "grommet";
-import { Close } from "grommet-icons";
+import { Close, Edit } from "grommet-icons";
+import { useHistory } from "react-router-dom";
+import ReactModal from "react-modal";
+import { useModal } from "react-modal-hook";
+import RegisterCompanies from "../../admin/pages/RegisterCompanies";
 
 const CompanyDetails = ({ history, match }) => {
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)"
+    }
+  };
+  const onSubmit = val => {};
+
+  const [showModal, hideModal] = useModal(() => (
+    <ReactModal isOpen style={customStyles}>
+      <p>Update Company's Details</p>
+
+      <button onClick={hideModal}>Hide modal</button>
+    </ReactModal>
+  ));
+
   const [companyData, setCompanyData] = useState({});
 
   useEffect(() => {
@@ -51,6 +75,9 @@ const CompanyDetails = ({ history, match }) => {
             onClick={deleteCompany}
             primary
           />
+        </Box>
+        <Box align="center" pad="small">
+          <Button icon={<Edit />} plain={false} primary onClick={showModal} />
         </Box>
       </div>
       <div className="dados">
