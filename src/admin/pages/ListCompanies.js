@@ -96,7 +96,7 @@ const CompaniesList = () => {
       {show && (
         <Layer
           full
-          margin={{ left: "20%", top: "10%", right: "20%", bottom: "30%" }}
+          margin={{ left: "20%", top: "10%", right: "20%", bottom: "50%" }}
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
         >

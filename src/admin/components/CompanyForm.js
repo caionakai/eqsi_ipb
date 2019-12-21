@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Field } from "react-final-form";
+import { Form, Field, FormSpy } from "react-final-form";
 import { Button } from "grommet";
 import Input from "../../common/components/Input";
 import { validade, isRequired } from "../../common/utils/validation";
@@ -9,7 +9,8 @@ function CompanyForm({
   isReadyToReset,
   setIsReadyToReset,
   submiting,
-  initialValues
+  initialValues,
+  cancel
 }) {
   return (
     <Form onSubmit={onSubmit} initialValues={initialValues}>
@@ -34,13 +35,29 @@ function CompanyForm({
             />
 
             <div className="button-container">
-              <Button
-                type="submit"
-                disabled={submiting}
-                label="Submit"
-                margin="small"
-                validate={validade([isRequired])}
-              />
+              {cancel && (
+                <Button
+                  onClick={() => {
+                    reset();
+                    cancel();
+                  }}
+                  disabled={submiting}
+                  label="Cancel"
+                  color="status-unknown"
+                  margin="small"
+                />
+              )}
+              <FormSpy subscription={{ pristine: true }}>
+                {props => (
+                  <Button
+                    type="submit"
+                    disabled={submiting || props.pristine}
+                    label="Submit"
+                    margin="small"
+                    primary
+                  />
+                )}
+              </FormSpy>
             </div>
           </form>
         );
