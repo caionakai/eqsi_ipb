@@ -7,6 +7,7 @@ function CustomHeader({ history, menus, homeLink }) {
   const renderMenus = () =>
     menus.map(menu => (
       <Menu
+        key={menu.name}
         label={menu.name}
         items={menu.items.map(item => ({
           label: item.name,

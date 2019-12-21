@@ -29,11 +29,11 @@ export default function Admin() {
       name: "Employees",
       items: [
         {
-          name: "list",
+          name: "List",
           link: "/admin/employees/list"
         },
         {
-          name: "register",
+          name: "Register",
           link: "/admin/employees/register"
         }
       ]
