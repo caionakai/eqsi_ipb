@@ -9,7 +9,7 @@ export const useAdmin = () => {
   const [admin, setAdmin] = useState(null);
   const [submiting, setSubmiting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState(null);
-//   const [admins, setAdmins] = useState([]);
+  const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
     if (admin) {
@@ -33,66 +33,46 @@ export const useAdmin = () => {
     }
   }, [admin]);
 
-//   useEffect(() => {
-//     const unsubscribe = db.collection("companies").onSnapshot(snapshot => {
-//       const allCompanies = snapshot.docs.map(doc => ({
-//         ...doc.data(),
-//         id: doc.id
-//       }));
-//       setCompanies(allCompanies);
-//     });
+  useEffect(() => {
+    const unsubscribe = db.collection("admin").onSnapshot(snapshot => {
+      const admins = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setAdmins(admins);
+    });
 
-//     return () => unsubscribe();
-//   }, []);
+    return () => unsubscribe();
+  }, []);
 
-//   const deleteCompany = id => {
-//     setSubmiting(true);
-//     db.collection("companies")
-//       .doc(id)
-//       .delete()
-//       .then(function() {
-//         setSubmitMessage({
-//           type: "success",
-//           msg: "company deleted"
-//         });
-//       })
-//       .catch(function(error) {
-//         setSubmitMessage({
-//           type: "error",
-//           msg: "Failed to delete a company"
-//         });
-//       })
-//       .finally(() => {
-//         setSubmiting(false);
-//       });
-//   };
-
-//   const updateCompany = (id, employee) => {
-//     setSubmiting(true);
-//     db.collection("companies")
-//       .doc(id)
-//       .set(employee, { merge: true })
-//       .then(() => {
-//         setSubmitMessage({
-//           type: "success",
-//           msg: "Company updated"
-//         });
-//       })
-//       .catch(error => {
-//         setSubmitMessage({
-//           type: "error",
-//           msg: "Failed to update a company"
-//         });
-//       })
-//       .finally(() => {
-//         setSubmiting(false);
-//       });
-//   };
+  const deleteAdmin = id => {
+    setSubmiting(true);
+    db.collection("admin")
+      .doc(id)
+      .delete()
+      .then(function() {
+        setSubmitMessage({
+          type: "success",
+          msg: "company deleted"
+        });
+      })
+      .catch(function(error) {
+        setSubmitMessage({
+          type: "error",
+          msg: "Failed to delete a company"
+        });
+      })
+      .finally(() => {
+        setSubmiting(false);
+      });
+  };
 
   return {
     setAdmin,
     submiting,
     submitMessage,
-    admin
+    admin,
+    admins,
+    deleteAdmin
   };
 };
