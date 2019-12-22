@@ -7,6 +7,7 @@ import CompaniesList from "./pages/ListCompanies";
 import RegisterEmployees from "./pages/RegisterEmployees";
 import CustomHeader from "../common/components/Header";
 import ListEmployees from "./pages/ListEmployees";
+import RegisterAdmin from "./pages/RegisterAdmin";
 
 export default function Admin() {
   const menus = [
@@ -35,6 +36,19 @@ export default function Admin() {
           link: "/admin/employees/register"
         }
       ]
+    },
+    {
+      name: "Admin",
+      items: [
+        {
+          name: "List",
+          link: "/admin/list"
+        },
+        {
+          name: "Register",
+          link: "/admin/register"
+        }
+      ]
     }
   ];
 
@@ -59,6 +73,9 @@ export default function Admin() {
             <ListEmployees />
           </Route>
 
+          <Route exact path="/admin/register">
+            <RegisterAdmin />
+          </Route>
         </Switch>
       </Main>
     </>
