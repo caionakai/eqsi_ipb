@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { firebase } from "../../common/utils/firebase";
 
 const db = firebase.firestore();
+const functions = firebase.functions();
+const createEmployee = functions.httpsCallable("createEmployee");
 
 export const useEmployees = () => {
   const [employee, setEmployee] = useState(null);
@@ -12,9 +14,8 @@ export const useEmployees = () => {
   useEffect(() => {
     if (employee) {
       setSubmiting(true);
-      db.collection("employees")
-        .add(employee)
-        .then(() => {
+      createEmployee(employee)
+        .then(result => {
           setSubmitMessage({
             type: "success",
             msg: "New employee registered"
@@ -23,7 +24,7 @@ export const useEmployees = () => {
         .catch(err => {
           setSubmitMessage({
             type: "error",
-            msg: "Failed to register a new employee"
+            msg: err.message || "Failed to register a new employee"
           });
         })
         .finally(() => {
@@ -77,7 +78,7 @@ export const useEmployees = () => {
           msg: "Employee updated"
         });
       })
-      .catch((error) => {
+      .catch(error => {
         setSubmitMessage({
           type: "error",
           msg: "Failed to update a employee"

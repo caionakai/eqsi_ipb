@@ -3,7 +3,11 @@ import { Button } from "grommet";
 import { Form, Field, FormSpy } from "react-final-form";
 
 import Input from "../../common/components/Input";
-import { validade, isRequired } from "../../common/utils/validation";
+import {
+  validade,
+  isRequired,
+  isLengthMin
+} from "../../common/utils/validation";
 import { maskDate } from "../../common/utils/masker";
 
 function EmployeeForm({
@@ -12,7 +16,8 @@ function EmployeeForm({
   setIsReadyToReset,
   submiting,
   initialValues,
-  cancel
+  cancel,
+  showAccountForm
 }) {
   return (
     <Form onSubmit={onSubmit} initialValues={initialValues}>
@@ -50,6 +55,23 @@ function EmployeeForm({
               format={maskDate}
               validate={validade([isRequired])}
             />
+            {showAccountForm && (
+              <>
+                <Field
+                  name="email"
+                  placeholder="email"
+                  component={Input}
+                  validate={validade([isRequired])}
+                />
+                <Field
+                  name="password"
+                  placeholder="password"
+                  type="password"
+                  component={Input}
+                  validate={validade([isRequired, isLengthMin(6)])}
+                />
+              </>
+            )}
             <div className="button-container">
               {cancel && (
                 <Button

@@ -3,20 +3,32 @@ import { TextInput, Box, Select, FormField } from "grommet";
 
 function Input({ input, meta, inputType, ...props }) {
   let InputComponent;
-  console.log(meta);
+  const { onChange, onBlur, ...inputProps } = input;
   switch (inputType) {
     case "select":
-      const { onChange, ...inputProps } = input;
       InputComponent = (
         <Select
           {...inputProps}
-          onChange={({ option }) => onChange({ target: { value: option } })}
+          onChange={({ option }) => {
+            onBlur(true)
+            onChange({ target: { value: option } });
+          }}
           {...props}
         />
       );
       break;
     default:
-      InputComponent = <TextInput error="teste" {...input} {...props} />;
+      InputComponent = (
+        <TextInput
+          error="teste"
+          {...inputProps}
+          {...props}
+          onChange={(e) => {
+            onBlur(true)
+            onChange(e);
+          }}
+        />
+      );
   }
   return (
     <Box margin="small">

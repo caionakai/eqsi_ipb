@@ -27,6 +27,7 @@ function RegisterEmployees() {
         isReadyToReset={isReadyToReset}
         setIsReadyToReset={setIsReadyToReset}
         submiting={submiting}
+        showAccountForm
       />
     </>
   );
