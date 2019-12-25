@@ -30,7 +30,7 @@ const CompaniesList = () => {
   const handleDelete = id => () => {
     swal({
       title: "Are you sure?",
-      text: "Are you sure that you want to delete this employee?",
+      text: "Are you sure that you want to delete this company?",
       icon: "warning",
       dangerMode: true,
       buttons: ["Cancel", "Delete"]
