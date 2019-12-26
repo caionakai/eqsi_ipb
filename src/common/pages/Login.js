@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Field, FormSpy } from "react-final-form";
 import { Button } from "grommet";
 import { firebase } from "../utils/firebase";
+import { withRouter } from "react-router-dom";
 import {
   validade,
   isRequired,
@@ -9,21 +10,18 @@ import {
 } from "../../common/utils/validation";
 import Input from "../../common/components/Input";
 
-const LoginPage = () => {
+const LoginPage = ({ history }) => {
   const onSubmit = values => {
     console.log(values);
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(values.email, values.password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorMessage);
-
-        // ...
-      });
+    try {
+      firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+      history.push("/admin");
+      history.go();
+    } catch (error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+    }
   };
 
   return (
@@ -61,4 +59,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withRouter(LoginPage);
