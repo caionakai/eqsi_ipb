@@ -6,6 +6,7 @@ const db = firebase.firestore();
 export const useUser = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
   const [userUid, setUserUid] = useState(null);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(function(user) {
@@ -25,9 +26,10 @@ export const useUser = () => {
         .doc(userUid)
         .get()
         .then(({ exists }) => setIsUserLoggedIn(!exists))
-        .catch(() => setIsUserLoggedIn(false));
+        .catch(() => setIsUserLoggedIn(false))
+        .finally(() => setIsLoadingUser(false))
     }
   }, [userUid]);
 
-  return { isUserLoggedIn, userUid };
+  return { isUserLoggedIn, userUid, isLoadingUser };
 };

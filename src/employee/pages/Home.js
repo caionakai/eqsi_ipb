@@ -3,19 +3,10 @@ import { Box, Clock, Button, Text, Layer, Heading, Select } from "grommet";
 
 import SelectCompany from "../components/SelectCompany";
 import { useUser } from "../hooks/user";
-import { useHistory } from "react-router-dom";
 
 function Home() {
   const [show, setShow] = useState(false);
-  const { isUserLoggedIn } = useUser();
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!isUserLoggedIn) {
-      history.replace("/login");
-      history.go()
-    }
-  }, [history, isUserLoggedIn]);
+  const { userUid } = useUser();
 
   const handleSubmit = values => {
     console.log(values);
