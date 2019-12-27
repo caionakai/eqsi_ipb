@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Field, FormSpy } from "react-final-form";
+import { Form, Field } from "react-final-form";
 import { Button } from "grommet";
 import { firebase } from "../utils/firebase";
 import { withRouter } from "react-router-dom";
@@ -11,21 +11,29 @@ import {
 import Input from "../../common/components/Input";
 
 const LoginPage = ({ history }) => {
-  const onSubmit = values => {
+  const [errMessage, setErrMessage] = useState("");
+  const onSubmit = async values => {
     console.log(values);
-    try {
-      firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+    let err = false;
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(values.email, values.password)
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        setErrMessage("email ou senha incorretos");
+        err = true;
+        console.log(errorMessage);
+      });
+    if (!err) {
       history.push("/admin");
       history.go();
-    } catch (error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
     }
   };
 
   return (
     <>
+      <p style={{ color: "red" }}>{errMessage}</p>
       <Form onSubmit={onSubmit}>
         {({ handleSubmit, form: { reset } }) => {
           return (
