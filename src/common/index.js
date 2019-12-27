@@ -9,7 +9,7 @@ export default function Admin() {
     <>
       <Main pad="large" align="center">
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/login">
             <LoginPage />
           </Route>
         </Switch>

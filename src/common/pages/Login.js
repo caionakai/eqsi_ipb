@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { Button } from "grommet";
 import { firebase } from "../utils/firebase";
@@ -19,14 +19,13 @@ const LoginPage = ({ history }) => {
       .auth()
       .signInWithEmailAndPassword(values.email, values.password)
       .catch(error => {
-        var errorCode = error.code;
         var errorMessage = error.message;
         setErrMessage("email ou senha incorretos");
         err = true;
         console.log(errorMessage);
       });
     if (!err) {
-      history.push("/admin");
+      history.push("/home");
       history.go();
     }
   };

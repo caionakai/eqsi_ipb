@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Header, Menu, Button, Box, Anchor } from "grommet";
+import { logout } from "../utils/logout";
 
 function CustomHeader({ history, menus, homeLink, brandLabel }) {
   const renderMenus = () =>
@@ -17,6 +18,7 @@ function CustomHeader({ history, menus, homeLink, brandLabel }) {
         }))}
       />
     ));
+
   return (
     <Header background="brand">
       <Box margin="small">
@@ -35,7 +37,9 @@ function CustomHeader({ history, menus, homeLink, brandLabel }) {
       <Box direction="row-responsive">
         {renderMenus()}
         <Box>
-          <Button margin="small">Logout</Button>
+          <Button margin="small" onClick={logout}>
+            Logout
+          </Button>
         </Box>
       </Box>
     </Header>

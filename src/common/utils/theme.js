@@ -20,5 +20,10 @@ export const theme = {
       verticalAlign: "bottom",
       extend: () => `font-weight: bold;`
     }
+  },
+  clock: {
+    digital: {
+      extend: () => `font-size: 96px !important`
+    }
   }
 };
