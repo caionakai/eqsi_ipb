@@ -9,6 +9,7 @@ import CustomHeader from "../common/components/Header";
 import ListEmployees from "./pages/ListEmployees";
 import RegisterAdmin from "./pages/RegisterAdmin";
 import ListAdmins from "./pages/ListAdmin";
+import Report from "./pages/Report";
 
 export default function Admin() {
   const menus = [
@@ -80,6 +81,10 @@ export default function Admin() {
 
           <Route exact path="/admin/list">
             <ListAdmins />
+          </Route>
+
+          <Route exact path="/admin">
+            <Report />
           </Route>
         </Switch>
       </Main>
