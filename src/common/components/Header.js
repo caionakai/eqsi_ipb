@@ -13,7 +13,7 @@ function CustomHeader({ history, menus, homeLink, brandLabel }) {
           label: item.name,
           onClick: () => {
             history.push(item.link);
-            history.go();
+            // history.go();
           }
         }))}
       />

@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import SelectCompany from "../components/SelectCompany";
 import { useUser } from "../hooks/user";
 import { useWork } from "../hooks/work";
+import { useHistory } from "react-router-dom";
 
 function Home() {
   const [show, setShow] = useState(false);
@@ -20,6 +21,7 @@ function Home() {
   const [companySelected, setCompanySelected] = useState(null);
   const [time, setTime] = useState("T00:00:00");
   const [isFirstTimeUpdate, setIsFirstTimeUpdate] = useState(true);
+  const history = useHistory()
 
   const handleStartWork = ({ company: { id, name } }) => {
     const workAmount = {
@@ -85,7 +87,14 @@ function Home() {
             )}
           </Box>
           <Box pad="large">
-            <Button label="Manage" primary />
+            <Button
+              label="Manage"
+              primary
+              onClick={() => {
+                history.push("/calendar");
+                // history.go();
+              }}
+            />
           </Box>
         </Box>
       </Box>

@@ -4,6 +4,7 @@ import { BrowserRouter as Switch, Route, useHistory } from "react-router-dom";
 
 import CustomHeader from "../common/components/Header";
 import Home from "./pages/Home";
+import Manage from "./pages/Manage";
 import { useUser } from "./hooks/user";
 
 export default function Employee() {
@@ -22,10 +23,13 @@ export default function Employee() {
     !isLoadingUser && (
       <>
         <CustomHeader brandLabel="Dashboard" menus={menus} homeLink="/home" />
-        <Main pad="large" align="center">
+        <Main align="center">
           <Switch>
             <Route path="/home">
               <Home />
+            </Route>
+            <Route path="/calendar">
+              <Manage />
             </Route>
           </Switch>
         </Main>
