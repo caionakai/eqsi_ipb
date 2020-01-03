@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { Header, Menu, Button, Box, Anchor } from "grommet";
 import { logout } from "../utils/logout";
 
-function CustomHeader({ history, menus, homeLink, brandLabel }) {
+function CustomHeader({ history, menus, homeLink, brandLabel, showLogout }) {
   const renderMenus = () =>
     menus.map(menu => (
       <Menu
@@ -13,7 +13,7 @@ function CustomHeader({ history, menus, homeLink, brandLabel }) {
           label: item.name,
           onClick: () => {
             history.push(item.link);
-            // history.go();
+            history.go();
           }
         }))}
       />
@@ -36,11 +36,13 @@ function CustomHeader({ history, menus, homeLink, brandLabel }) {
 
       <Box direction="row-responsive">
         {renderMenus()}
-        <Box>
-          <Button margin="small" onClick={logout}>
-            Logout
-          </Button>
-        </Box>
+        {showLogout && (
+          <Box>
+            <Button margin="small" onClick={logout}>
+              Logout
+            </Button>
+          </Box>
+        )}
       </Box>
     </Header>
   );

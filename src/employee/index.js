@@ -6,6 +6,7 @@ import CustomHeader from "../common/components/Header";
 import Home from "./pages/Home";
 import Manage from "./pages/Manage";
 import { useUser } from "./hooks/user";
+import { logout } from "../common/utils/logout";
 
 export default function Employee() {
   const menus = [];
@@ -14,22 +15,29 @@ export default function Employee() {
 
   useEffect(() => {
     if (!isUserLoggedIn) {
-      history.replace("/login");
-      history.go();
+      logout().then(() => {
+        history.replace("/login");
+        history.go();
+      });
     }
   }, [history, isUserLoggedIn]);
 
   return (
     !isLoadingUser && (
       <>
-        <CustomHeader brandLabel="Dashboard" menus={menus} homeLink="/home" />
+        <CustomHeader
+          brandLabel="Dashboard"
+          menus={menus}
+          homeLink="/"
+          showLogout
+        />
         <Main align="center">
           <Switch>
-            <Route path="/home">
-              <Home />
-            </Route>
             <Route path="/calendar">
               <Manage />
+            </Route>
+            <Route exact path="/">
+              <Home />
             </Route>
           </Switch>
         </Main>
