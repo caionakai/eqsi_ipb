@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Layer } from "grommet";
 import swal from "sweetalert";
-import { ReactAgenda, guid } from "react-agenda";
+import { ReactAgenda } from "react-agenda";
 import { useUser } from "../hooks/user";
 import { useWork } from "../hooks/work";
 import moment from "moment";

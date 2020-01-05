@@ -47,12 +47,13 @@ const Report = () => {
 
   useEffect(() => {
     console.log(workAmount);
-    companies.map(val => {
+    const hours = companies.map(val => {
       const company_name = val.name;
       const company_id = val.id;
       let dataObj = { name: company_name, hours: 0 };
+      let employeesCurrentWorking = 0
 
-      workAmount.map(val => {
+      workAmount.forEach(val => {
         if (val.company === company_id && val.endTime) {
           dataObj.hours += parseFloat(
             (
@@ -64,18 +65,19 @@ const Report = () => {
           );
         }
         if (!val.endTime) {
-          setemployeesWorking(employeesWorking + 1);
+          employeesCurrentWorking = employeesCurrentWorking + 1;
         }
       });
 
-      setHoursWorked(prevState => {
-        const oldArr = [...prevState];
-        dataObj.hours = parseFloat(dataObj.hours.toFixed(2));
-        oldArr.push(dataObj);
-        return [...oldArr];
-      });
+      setemployeesWorking(employeesCurrentWorking)
+
+      return {
+        ...dataObj,
+        hours: parseFloat(dataObj.hours.toFixed(2))
+      }
     });
-  }, [workAmount]);
+    setHoursWorked(hours)
+  }, [companies, workAmount]);
 
   useEffect(() => {
     console.log(hoursWorked);
@@ -85,8 +87,9 @@ const Report = () => {
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(20, 1fr)",
-        gridTemplateRows: "repeat(20, 5%)"
+        gridTemplateColumns: "repeat(18, 1fr)",
+        gridTemplateRows: "repeat(20, 5%)",
+        // margin: "auto"
       }}
     >
       <div
@@ -95,10 +98,12 @@ const Report = () => {
           padding: "20px",
           boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
           gridColumn: "2 / 10",
-          gridRow: "1 / 7"
+          gridRow: "1 / 20",
+          width: "100%",
+          overflowY: "auto"
         }}
       >
-        <Table alignSelf="stretch">
+        <Table margin={{"right": 0}}>
           <TableHeader>
             <TableRow>
               <TableCell scope="col" border="bottom">
@@ -118,7 +123,7 @@ const Report = () => {
           border: "0.01px solid grey",
           padding: "20px",
           boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-          gridColumn: "2 / 10",
+          gridColumn: "11 / 18",
           gridRow: "8 / 20"
         }}
       >
@@ -135,8 +140,8 @@ const Report = () => {
             dataKey="hours"
             isAnimationActive={false}
             data={hoursWorked}
-            cx={200}
-            cy={200}
+            cx={280}
+            cy={150}
             outerRadius={80}
             fill="#34a4eb"
             label
